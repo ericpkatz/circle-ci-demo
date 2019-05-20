@@ -5,8 +5,20 @@ catch(ex){
   console.log('no .env file found');
 }
 const expect = require('chai').expect;
+const  Sequelize = require('sequelize');
+const conn = new Sequelize(process.env.DATABASE_URL);
+conn.define('user', {
+});
 
-describe('Some Javascript', ()=> {
+
+describe('Some Stuff', ()=> {
+  describe('a database', ()=> {
+    beforeEach(()=> {
+      return conn.sync({ force: true });
+    });
+    it('seeds', ()=> {
+    });
+  });
   describe('the concat method', ()=> {
     it('does not mutate', ()=> {
       const a = [1, 2];

@@ -7,16 +7,20 @@ catch(ex){
 const expect = require('chai').expect;
 const  Sequelize = require('sequelize');
 const conn = new Sequelize(process.env.DATABASE_URL);
-conn.define('user', {
+const User = conn.define('user', {
+  name: Sequelize.STRING
 });
 
 
 describe('Some Stuff', ()=> {
   describe('a database', ()=> {
     beforeEach(()=> {
-      return conn.sync({ force: true });
+      return conn.sync({ force: true })
+        .then(()=> User.create({ name: 'moe' }));
     });
     it('seeds', ()=> {
+      return User.findOne({ name: 'moe' })
+        .then( user => expect(user.name).to.equal('moe'));
     });
   });
   describe('the concat method', ()=> {

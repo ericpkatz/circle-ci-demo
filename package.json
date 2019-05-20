@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:dev": "npm run test -- --watch",
-    "test": "DATABASE_URL=postgres://localhost/my_db ./node_modules/mocha/bin/mocha test.spec.js"
+    "test": "npm run test:server",
+    "test:dev": "DATABASE_URL=postgres://localhost/my_db npm run test:server -- --watch",
+    "test:server": "./node_modules/mocha/bin/mocha test.spec.js"
   },
   "keywords": [],
   "author": "",
